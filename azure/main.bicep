@@ -1,11 +1,26 @@
-module VNetVotingApp 'modules/vnet.bicep' = {
-  name: 'VNetVotingApp'
+param dbAdminUsername string
+@secure()
+param dbAdminPassword string
+param serverName string
+
+module vnet 'modules/vnet.bicep' = {
+  name: 'vnet-deploy'
 }
 
-module DnsVotingApp 'modules/dns.bicep' = {
-  name: 'DnsVotingApp'
+module dns 'modules/dns.bicep' = {
+  name: 'dns-deploy'
   params: {
-    vnetId: VNetVotingApp.outputs.vnetId
+    vnetId: vnet.outputs.vnetId
   }
 }
 
+module postgres 'modules/postgres.bicep' = {
+  name: 'postgres-deploy'
+  params: {
+    adminPassword: dbAdminPassword
+    adminUsername: dbAdminUsername
+    dnsZoneId: dns.outputs.dnsZoneId
+    serverName: serverName
+    subnetId: vnet.outputs.dbSubnetId
+  }
+}

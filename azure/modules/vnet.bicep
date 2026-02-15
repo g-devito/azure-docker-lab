@@ -1,5 +1,5 @@
-resource VNetVotingApp 'Microsoft.Network/virtualNetworks@2024-07-01' = {
-  name: 'VNetVotingApp'
+resource vnet 'Microsoft.Network/virtualNetworks@2024-07-01' = {
+  name: 'vnet-deploy'
   location: resourceGroup().location
   properties: {
     addressSpace: {
@@ -31,5 +31,5 @@ resource VNetVotingApp 'Microsoft.Network/virtualNetworks@2024-07-01' = {
     ]
   }
 }
-output vnetId string = VNetVotingApp.id
-output dbSubnetId string = VNetVotingApp.properties.subnets[1].id
+output vnetId string = vnet.id
+output dbSubnetId string = vnet.properties.subnets[1].id

@@ -17,3 +17,5 @@ resource LinksVotingApp 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2
     }
   }
 }
+
+output dnsZoneId string = DNSVotingApp.id
