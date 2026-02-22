@@ -4,10 +4,11 @@ param adminUsername string
 param adminPassword string
 param subnetId string
 param dnsZoneId string
+param rgLocation string
 
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2023-06-01-preview' = {
   name: serverName
-  location: resourceGroup().location
+  location: rgLocation
   sku: {
     name: 'Standard_B1ms'
     tier: 'Burstable'

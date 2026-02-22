@@ -1,6 +1,8 @@
+param rgLocation string
+
 resource vnet 'Microsoft.Network/virtualNetworks@2024-07-01' = {
   name: 'vnet-deploy'
-  location: resourceGroup().location
+  location: rgLocation
   properties: {
     addressSpace: {
       addressPrefixes: [
